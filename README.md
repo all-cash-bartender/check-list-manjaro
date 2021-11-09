@@ -239,12 +239,14 @@ cached_login=yes
 silent=no
 mkhomedir=yes
 ```
-## 17.	Sudo nano /etc/conf.d/samba
+## 17.	Добавляем строчку в конфиг самбы
 ```
+sudo nano /etc/conf.d/samba
 SAMBA_DAEMONS=(smbd nmbd)
 SAMBA_DAEMONS=(smbd nmbd winbindd)
 ```
-## 18.	Sudo nano /etc/hosts
+## 18.	Настраиваем хостнейм
+##### sudo nano /etc/hosts
 ##### Удаляем все упоминания IPv6 и пишем полное доменное имя машины + её IPv4 адрес в формате.
 ##### 127.0.0.1 pc.domain.com pc
 
@@ -351,9 +353,9 @@ x11vnc --storepasswd  /etc/x11vnc.passwd
 ## 31.	Меняем DM
 ```
 sudo pacman -R sddm-kcm
-sudo pacman –R sddm
+sudo pacman -R sddm
 sudo systemctl disable sddm
-sudo pacman –S lxdm
+sudo pacman -S lxdm
 sudo systemctl start lxdm
 sudo systemctl enable lxdm
 ```
