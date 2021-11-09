@@ -32,7 +32,7 @@ git clone https://github.com/alliedium/awesome-linux-config.git
 ```
 ### 6.2 Заходим в папку проекта
 ```
-cd awesome-linux-config/manjaro19/basic/
+cd awesome-linux-config/manjaro/basic/
 ```
 ### 6.3 Запускаем общесистемные скрипты установки.
 ```
@@ -57,7 +57,7 @@ yay -Syyuu --nodiffmenu --nocleanmenu --noconfirm
 ```
 ## 11.	Устанавливаем необходимый софт для ввода машины в домен (будет перенесено в папку sysadmin)
 ```
-yay –Syyuu samba krb5 sssd tree usbguard kmplayer mplayer pam-krb5 ntp --nodiffmenu --nocleanmenu --noconfirm
+yay –Syyuu samba krb5 tree usbguard kmplayer mplayer pam-krb5 ntp --nodiffmenu --nocleanmenu --noconfirm
 ```
 ## 12.	Перезагружаемм систему
 ## 13.	Проверяем текщее время на машине 
@@ -67,12 +67,29 @@ date
 ## 14.	Конфигурируем систему.
 ### 14.1 Настройка времени
 > sudo nano /etc/ntp.conf  
-###### Меняем IP и FQDN адреса NTP серверов на требуемые локальные
+###### Указываем откуда брать время для синхронизации
 ```
-server 192.168.*.* 
-server 192.168.*.*
-server dc.server.com 
-server dc1.server.com 
+sudo nano /etc/systemd/timesyncd.conf
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+# Entries in this file show the compile time defaults.
+# You can change settings by editing this file.
+# Defaults can be restored by simply deleting this file.
+#
+# See timesyncd.conf(5) for details.
+
+[Time]
+NTP=192.168.*.*
+FallbackNTP=192.168.*.*
+#RootDistanceMaxSec=5
+#PollIntervalMinSec=32
+#PollIntervalMaxSec=2048
+
 ```
 
 > sudo ntpd server 192.168.*.*
